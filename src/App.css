@@ -33,11 +33,16 @@
 /* Logo */
 .logo {
   display: flex;
-  flex-direction: column;
   align-items: center;
   line-height: 1.1;
   position: relative;
   min-width: 90px;
+}
+
+.logo-img {
+  display: block;
+  height: 64px;
+  width: auto;
 }
 
 .logo-top {

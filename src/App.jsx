@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import heroImage from './assets/heroImage.png'
 import aboutImage from './assets/AboutusPicture.png'
+import logoImage from './assets/Kream&KrumbLogo.png'
 
 // Product imports
 import biscoffBrownie from './assets/kkProducts/Biscoff Brownie (box of 6 price 1400)(box of 8 price 1800).jpeg'
@@ -223,9 +224,7 @@ function App() {
       <header className="navbar">
         <div className="navbar-inner">
           <a href="#home" className="logo" aria-label="Kream and Krumb Home">
-            <span className="logo-top">Kream &amp;</span>
-            <span className="logo-bottom">Krumb</span>
-            <span className="logo-heart" aria-hidden="true">♡</span>
+            <img src={logoImage} alt="Kream and Krumb" className="logo-img" />
           </a>
 
           <nav className="nav-links" aria-label="Primary navigation">
@@ -358,9 +357,7 @@ function App() {
       <footer className="site-footer" id="contact">
         <div className="footer-inner">
           <div className="footer-brand">
-            <span className="logo-top">Kream &amp;</span>
-            <span className="logo-bottom">Krumb</span>
-            <span className="logo-heart" aria-hidden="true">♡</span>
+            <img src={logoImage} alt="Kream and Krumb" className="logo-img" />
           </div>
           <p className="footer-tagline">Handcrafted brownies, made with love.</p>
           <nav className="footer-links" aria-label="Footer navigation">
