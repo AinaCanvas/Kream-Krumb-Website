@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import heroImage from './assets/heroImage.png'
 import aboutImage from './assets/AboutusPicture.png'
 import logoImage from './assets/Kream&KrumbLogo.png'
 
 // Product imports
-import biscoffBrownie from './assets/kkProducts/Biscoff Brownie (box of 6 price 1400)(box of 8 price 1800).jpeg'
+import biscoffBrownie from './assets/kkProducts/Biscoff Brownie (box of 6 price 1400)(box of 8 price 1800).png'
 import brownieCookiesBox from './assets/kkProducts/Brownie&Cookies Box 1600.jpeg'
 import celebrationLog from './assets/kkProducts/Celebration log 1000.jpeg'
-import classicFudge from './assets/kkProducts/Classic fudge (box of 6 price 1100)(box of 8 price 1400).jpeg'
-import nutellaBrownie from './assets/kkProducts/Nutella Brownie (box of 6 price 1400)(box of 8 price 1800).jpeg'
-import walnutBrownie from './assets/kkProducts/Walnut Brownie (box of 6 price 1400)(Box of 8 price 1800).jpeg'
+import classicFudge from './assets/kkProducts/Classic fudge (box of 6 price 1100)(box of 8 price 1400).png'
+import nutellaBrownie from './assets/kkProducts/Nutella Brownie (box of 6 price 1400)(box of 8 price 1800).png'
+import walnutBrownie from './assets/kkProducts/Walnut Brownie (box of 6 price 1400)(Box of 8 price 1800).png'
+import assortedBox from './assets/kkProducts/assorted box of 6 price 1400 box of 8 price 1800.jpeg'
 
 const products = [
   {
@@ -76,6 +77,17 @@ const products = [
     ],
     description: 'A showstopping brownie log made for celebrations. Dense, fudgy, and decorated to impress — this is the centrepiece your dessert table deserves. Customisation available on request.',
     details: ['Made to order', 'Serves 6–8 people', 'Custom messages available — DM us on Instagram'],
+  },
+  {
+    id: 7,
+    name: 'Assorted Box',
+    image: assortedBox,
+    sizes: [
+      { label: 'Box of 6', price: 1400 },
+      { label: 'Box of 8', price: 1800 },
+    ],
+    description: 'Can\'t pick just one? This assorted box combines our most popular brownie flavours in one beautiful package — perfect for sharing. Every bite is a new favourite.',
+    details: ['Includes: Assorted brownie flavours', 'Shelf life: 4–5 days at room temperature', 'Perfect for gifting or sharing'],
   },
 ]
 
@@ -216,12 +228,22 @@ function ProductModal({ product, onClose }) {
 
 function App() {
   const [activeProduct, setActiveProduct] = useState(null)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 40)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <div className="site-wrapper">
 
       {/* ── NAVBAR ── */}
-      <header className="navbar">
+      <header className={`navbar${scrolled ? ' scrolled' : ''}`}>
         <div className="navbar-inner">
           <a href="#home" className="logo" aria-label="Kream and Krumb Home">
             <img src={logoImage} alt="Kream and Krumb" className="logo-img" />
@@ -274,9 +296,8 @@ function App() {
       {/* ── PRODUCTS ── */}
       <section id="shop" className="products-section" aria-label="Our products">
         <div className="products-header">
-          <p className="section-eyebrow">OUR BESTSELLERS</p>
+          <p className="section-eyebrow">OUR PRODUCTS</p>
           <h2 className="section-heading">Fan Favorites</h2>
-          <a href="#shop" className="view-all">View All <span aria-hidden="true">→</span></a>
         </div>
         <div className="products-grid">
           {products.map((p) => (
@@ -356,9 +377,9 @@ function App() {
       {/* ── FOOTER ── */}
       <footer className="site-footer" id="contact">
         <div className="footer-inner">
-          <div className="footer-brand">
+          <a href="#home" className="footer-brand" aria-label="Kream and Krumb Home">
             <img src={logoImage} alt="Kream and Krumb" className="logo-img" />
-          </div>
+          </a>
           <p className="footer-tagline">Handcrafted brownies, made with love.</p>
           <nav className="footer-links" aria-label="Footer navigation">
             <a href="#home">Home</a>
@@ -366,7 +387,6 @@ function App() {
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
           </nav>
-          <p className="footer-copy">&copy; {new Date().getFullYear()} Kream &amp; Krumb. All rights reserved.</p>
         </div>
       </footer>
 
