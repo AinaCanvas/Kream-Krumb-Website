@@ -329,6 +329,7 @@ function App() {
             </article>
           ))}
         </div>
+        <p className="products-note">All prices are exclusive of delivery charges.</p>
       </section>
 
       {/* ── OUR STORY ── */}
